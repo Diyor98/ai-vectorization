@@ -16,4 +16,4 @@ import fs from 'fs';
 	await client.collections.upsertPoints('harry_potter_chunks', { points });
 
 	console.log('Vectors uploaded to Qdrant!');
-})();
+})().catch(console.error);

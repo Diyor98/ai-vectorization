@@ -1,4 +1,4 @@
-Sure—here’s your **formatted `README.md`** content, nicely structured in Markdown:
+Markdown:
 
 ````markdown
 # Project Setup
