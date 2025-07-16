@@ -4,7 +4,17 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"qdrant": "docker run -p 6333:6333 -p 6334:6334 qdrant/qdrant",
+		"parse": "node parser.js",
+		"chunk": "node chunk-text.js",
+		"embed": "node embed.js",
+		"create-collection": "node create-collection.js",
+		"openai-create-collection": "node openai-create-collection.js",
+		"openai-upload-vectors": "node --env-file=.env openai-upload-vectors.js",
+		"upload-vectors": "node upload-vectors.js",
+		"query": "node --env-file=.env query.js",
+		"openai-query": "node --env-file=.env openai-query.js"
 	},
 	"keywords": [],
 	"author": "",

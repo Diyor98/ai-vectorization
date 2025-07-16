@@ -7,7 +7,7 @@ const rawText = fs.readFileSync('./harry_potter.txt', 'utf-8');
 const tokenizer = new SentenceTokenizer();
 const sentences = tokenizer.tokenize(rawText);
 
-const chunkSize = +process.env.CHUNK_SIZE ?? 5; // sentences per chunk
+const chunkSize = +(process.env.CHUNK_SIZE ?? 5); // sentences per chunk
 const chunks = [];
 
 for (let i = 0; i < sentences.length; i += chunkSize) {
