@@ -1,5 +1,7 @@
 import fs from 'fs';
 import natural from 'natural';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const { SentenceTokenizer } = natural;
 const rawText = fs.readFileSync('./harry_potter.txt', 'utf-8');

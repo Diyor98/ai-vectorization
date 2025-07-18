@@ -1,5 +1,8 @@
 import { pipeline } from '@xenova/transformers';
 import fs from 'fs';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 (async () => {
 	// Load embedding pipeline

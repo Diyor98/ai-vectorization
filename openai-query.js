@@ -1,15 +1,18 @@
-import * as qdrant from 'qdrant-client';
+import client from './local-qdrant-client.js';
 import OpenAI from 'openai';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_KEY });
 
 (async () => {
-	const client = new qdrant.Api({ baseUrl: 'http://localhost:6333' });
-	const openai = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+	const queryText = 'Where does Harry study?';
 
-	const queryText = 'Where did Harry go to school?';
+	const hypoText = await hydeQueryRAG(queryText);
 
 	const response = await openai.embeddings.create({
 		model: 'text-embedding-3-small',
-		input: queryText,
+		input: hypoText,
 	});
 
 	console.log('Openai response,', response.data[0].embedding);
@@ -69,3 +72,26 @@ YOUR ANSWER:
 	console.log('Answer:');
 	console.log(finalAnswer);
 })().catch(console.error);
+
+async function hydeQueryRAG(userQuery) {
+	const answer = await openai.chat.completions.create({
+		model: 'gpt-4.1-nano',
+		messages: [
+			{
+				role: 'system',
+				content: `You are a Harry Potter expert. Answer the question below based only on the Harry Potter universe.
+				If the question is not related to Harry Potter, respond with: "ASK ABOUT HARRY POTTER ONLY."`,
+			},
+			{
+				role: 'user',
+				content: userQuery,
+			},
+		],
+	});
+
+	const hypoText = answer.choices[0].message.content;
+
+	console.log('Hypothetical text: ', hypoText);
+
+	return hypoText;
+}

@@ -1,9 +1,10 @@
-import * as qdrant from 'qdrant-client';
+import client from './local-qdrant-client.js';
 import fs from 'fs';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 (async () => {
-	const client = new qdrant.Api({ baseUrl: 'http://localhost:6333' });
-
 	const embeddings = JSON.parse(fs.readFileSync('./embeddings.json', 'utf-8'));
 	const chunks = JSON.parse(fs.readFileSync('./chunks.json', 'utf-8'));
 

@@ -1,5 +1,8 @@
 import * as pdfParse from 'pdf-parse/lib/pdf-parse.js';
 import fs from 'fs';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 (async () => {
 	const file = fs.readFileSync('./harry_potter.pdf');

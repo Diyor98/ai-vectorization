@@ -1,13 +1,15 @@
-import * as qdrant from 'qdrant-client';
+import client from './local-qdrant-client.js';
 import { pipeline } from '@xenova/transformers';
 import OpenAI from 'openai';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 (async () => {
 	const embedder = await pipeline(
 		'feature-extraction',
 		'Xenova/all-MiniLM-L6-v2'
 	);
-	const client = new qdrant.Api({ baseUrl: 'http://localhost:6333' });
 
 	const queryText = 'Where did Harry go to school?';
 
